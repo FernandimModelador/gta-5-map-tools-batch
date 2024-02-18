@@ -155,21 +155,21 @@ function chooseOption() {
     chooseOption(); // Choose another option
   });
 
-    } else if (option === '4') {
-      // Logic to generate "item list.txt"
-      rl.question('Enter the directory with .ydr files: ', (directory) => {
-        const ydrFiles = fs.readdirSync(directory).filter((file) => file.endsWith('.ydr'));
-        if (ydrFiles.length > 0) {
-          const itemList = ydrFiles.map((file) => path.parse(file).name);
-          const itemListPath = path.join(directory, 'item list.txt');
-          fs.writeFileSync(itemListPath, itemList.join('\n'));
-          console.log('item list.txt has been generated.');
-        } else {
-          console.log('No .ydr files found in the specified directory.');
-        }
-        chooseOption(); // Choose another option
-      });
-    } else if (option === '5') {
+    }  else if (option === '4') {
+  // Logic to generate "item list.txt"
+  rl.question('Enter the directory with files: ', (directory) => {
+    const allFiles = fs.readdirSync(directory);
+    if (allFiles.length > 0) {
+      const itemList = allFiles.map((file) => path.parse(file).name);
+      const itemListPath = path.join(directory, 'item list.txt');
+      fs.writeFileSync(itemListPath, itemList.join('\n'));
+      console.log('item list.txt has been generated.');
+    } else {
+      console.log('No files found in the specified directory.');
+    }
+    chooseOption(); // Choose another option
+  });
+} else if (option === '5') {
       // Logic to replace normal names with hashed names in ymap.xml
       rl.question('Enter the directory with hash list.txt, item list.txt, and ymap.xml files: ', (directory) => {
         const hashFilePath = path.join(directory, 'hash list.txt');
